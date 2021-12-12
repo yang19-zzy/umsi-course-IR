@@ -1,4 +1,4 @@
-from pandas.core.dtypes import base
+# from pandas.core.dtypes import base
 
 
 def get_documents_dict():
