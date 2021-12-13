@@ -9,3 +9,4 @@ Therefore, we want to use the knowledge learned from the course to build a cours
 
 ## II - Data
 ### Data Recourse
+The data we used for this project is from [UMSI course website](https://www.si.umich.edu/programs/courses). We collected all courses it has, including course number, course name, and course description. 
