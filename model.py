@@ -36,5 +36,5 @@ def get_top_5_related(query):
     # return results
 
     transform = pipeline.transform(query)
-    results = transform['docno'].tolist()[:10]
+    results = transform['docno'].tolist()[:5]
     return results
