@@ -2,13 +2,18 @@
 
 
 def get_documents_dict():
-    import os
-    umsi_doc_list = os.listdir('Data/UMSI')
-    documents = {}
-    for filename in umsi_doc_list:
-        with open(f"Data/UMSI/{filename}", "r") as f:
-            documents[filename.split('.')[0]] = f.read().split('\n')[0]
-    return documents
+    # import os
+    # umsi_doc_list = os.listdir('Data/UMSI')
+    # documents = {}
+    # for filename in umsi_doc_list:
+    #     with open(f"Data/UMSI/{filename}", "r") as f:
+    #         documents[filename.split('.')[0]] = f.read().split('\n')[0]
+    import json
+ 
+    # Opening JSON file
+    with open('documents_info.json') as json_file:
+        data = json.load(json_file)
+    return data
 
 
 def get_course_link(base_url='https://www.si.umich.edu/programs/courses', course_num=""):
