@@ -1,16 +1,7 @@
-# from pandas.core.dtypes import base
-
+import pyterrier as pt
+import json
 
 def get_documents_dict():
-    # import os
-    # umsi_doc_list = os.listdir('Data/UMSI')
-    # documents = {}
-    # for filename in umsi_doc_list:
-    #     with open(f"Data/UMSI/{filename}", "r") as f:
-    #         documents[filename.split('.')[0]] = f.read().split('\n')[0]
-    import json
- 
-    # Opening JSON file
     with open('documents_info.json') as json_file:
         data = json.load(json_file)
     return data
@@ -21,8 +12,6 @@ def get_course_link(base_url='https://www.si.umich.edu/programs/courses', course
 
 
 def get_top_5_related(query):
-
-    import pyterrier as pt
     if not pt.started():
         pt.init() 
 
@@ -39,7 +28,6 @@ def get_top_5_related(query):
     pipeline = bm25_wiki >> qe_wiki >> bm25
 
     # return results
-
     transform = pipeline.transform(query)
     results = transform['docno'].tolist()[:5]
     return results
