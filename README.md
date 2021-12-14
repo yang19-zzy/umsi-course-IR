@@ -2,6 +2,10 @@
 (tl;dr)
 This project uses Pyterrier to index documents(course descriptions) and retrieve top 10 most relevant courses with Wikipedia collection indexing and its query expansion.
 
+### Team member
+Ssu-Ying Chen  ([cssuing@umich.edu](cssuing@umich.edu))
+Zhengyang Zhao  ([zzyang@umich.edu](zzyang@umich.edu))
+
 
 ## I - Project Intention
 This project is originally a course project from [UMSI 650 - Information Retrieval](https://www.si.umich.edu/programs/courses/650). Based on our own experience as students, we know that students are struggling with choosing the right courses for themselves, especially when they are still unsure about their future career path and want to try anything they're interested in.
