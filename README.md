@@ -18,12 +18,14 @@ There are total 120 courses under UMSI. We have 120 `.txt` files stored in Googl
 We created three DataFrames that we will need for the next step indexing.
 
 1. Document dataframe
+
 docno | abstract
 ---|---
 si_106 | <course title> <course description>
 ... | ...
   
 2. Query dataframe
+
 qid | query
 --- | ---
 1 | R programming
