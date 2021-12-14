@@ -19,6 +19,6 @@ We created three DataFrames that we will need for the next step indexing.
 
 1. Document dataframe
 docno | abstract
-----------------
+-------|---------
 si_106 | <course title> <course description>
 2. 
