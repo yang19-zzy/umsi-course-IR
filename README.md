@@ -50,13 +50,6 @@ Here is how these query-doc pair distribute after annotation.
 ![Number of Query-Doc Pairs in Each Relevant Level](https://github.com/yang19-zzy/umsi-course-IR/blob/main/image/barplot1.png)
 
 
-Also, since we didn't annotate all documents, the rest of query-doc pair we considered them having relation level 1.
-
-Here is how filled-with-1 query-doc pair distribute.
-
-![Number of Query-Doc Pairs in Each Relevant Level (fillna)](https://github.com/yang19-zzy/umsi-course-IR/blob/main/image/barplot2.png)
-
-
 ## III - Indexing
 We used [Pyterrier](https://pyterrier.readthedocs.io/en/latest/installation.html) to fulfill our indexing need with the following code.
 ```
@@ -158,8 +151,22 @@ QE_wiki|	0.613924|	0.745158|	0.767340|	0.179|	0.095|	0.895|	0.95
 ## V - Deployment
 In order to make the project outcome as real as possible, we used [streamlit](https://streamlit.io/) to deploy the retrieve model. Since we faced some technical issue, we can only share a screenshot of our "website". 
 
+![Our streamlit app](https://github.com/yang19-zzy/umsi-course-IR/blob/main/image/app.png)
 
 ## VI - Discussion
+As we discussed in the introduction, the course search system UMSI students currently have is Atlas. The target user of our systems might only know that they want to learn Django but the word Django is often not specified in the course name nor in the course description which makes it difficult for students when deciding which course to take if they have to select a few courses from the whole university. What’s worse, this kind of keyword search is not supported by Atlas, and that is why we are designing our IR system to help students find courses. For example, as shown below in the Atlas screenshot, we can see that there is no result for the query “django”, which indicates that using additional knowledge base to expand the queries is a more appropriate approach for our project. Also, because we didn’t have enough training data, we conducted query expansion according to the pseudo relevance feedback documents retrieved from WikiPedia. 
 
+Increasing recall and achieving search improvement are what we hoped to have: our project objective is to provide students with more course options which they were not aware of before. Therefore, instead of precision, we care more about recall. Moreover, based on our course selection experience, ten retrieved documents for a query is better than five retrieved documents since it is always helpful to know more about what other options are available.
+During the experiments, we found something interesting. Hence, we chose to focus on R@10. 
 
-## VII - Next Steps
+Among all the three indexing methods, query expansion with Wikipedia achieved the highest R@10, which means that the augmented WikiPedia knowledge helped us find more related courses. This result achieved our expectation of augmented knowledge base and this method did improve the search result on our website. 
+
+Also, SDM does not have significant improvement on the scores, which is due to the number of our query terms. SDM will create N-Grams representation and weighting for the query terms; however, most of our queries consist of no more than three terms. This is the reason why there is no big difference between the BM25 baseline and SDM.
+
+Besides, doc2query is not performing as well as we expected which could have been resulted from the pattern of our queries. Our queries are short and they are not like a sentence of questions; therefore, we think this is the reason why the doc2query generated queries are not helping a lot.
+
+## VII - Conclusion
+This project aims to provide wider course selection options for students who are not aware of what courses are related to their topics of interest. Since the current course selecting website, Atlas, is not supporting keyword search, we decided to create one information retrieval system that does support this function. The method we used to solve this problem is to add additional knowledge base indexed from Wikipedia dataset obtained through PyTerrier and conduct query expansion using this additional index. This method improved the recall and satisfied our expectations when tested on our website.
+
+## VIII - Next Steps
+We realized that full annotation for each query and document will lead to more plausible evaluation scores, so if we had more time we would have annotated all the documents retrieved by BM25. Moreover, we also plan to implement learning-to-rank machine learning models which also need full annotation if we hope to really see some improvements. 
