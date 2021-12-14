@@ -135,3 +135,13 @@ pt.Experiment(
     names=["BM25", "SDM", "QE"]
 )
 ```
+
+### Evaluation Results
+Here is a table of how the pipelines using our first indexing perform. You can notice that pipeline with query expansion performed the best.
+
+name |	AP	| nDCG@10	| nDCG@5 |	R@10	| R@5	| P@10	| P@5
+--- | --- | --- | --- | --- | --- | --- | --- 
+BM25	|0.210000|	0.707263|	0.753723|	0.067500|	0.037917|	0.81|	0.91
+SDM|	0.213333|	0.712436|	0.757567|	0.067500|	0.037917|	0.81|	0.91
+QE|	0.634167|	0.761060|	0.774291|	0.079167|	0.039583|	0.95|	0.95
+
