@@ -115,7 +115,7 @@ We made three pipelines. We had BM25 as our baseline. Since we wanted to try how
 
 Then, how do we evaluate our pipelines? 🤔  Remember, we want to know how models perform and how many relevant courses are recommend to students.
 
-So, we needed nDCG@10, nDCG@5, P@10, P@5, R@10, R@5 (P=Precision, R=Recall). The reason we have evaluation values @5 and @10 is that we want to know how fast the evaluation values change and how likely highly relevant courses are retrieved.
+So, we needed nDCG@10, nDCG@5, P@10, P@5, R@10, R@5 (P=Precision, R=Recall). The reason we have evaluation values @5 and @10 is that we want to know how evaluation values change.
 
 Here are some codes that we used to evaluate our pipelines.
 ```
@@ -145,3 +145,4 @@ BM25	|0.210000|	0.707263|	0.753723|	0.067500|	0.037917|	0.81|	0.91
 SDM|	0.213333|	0.712436|	0.757567|	0.067500|	0.037917|	0.81|	0.91
 QE|	0.634167|	0.761060|	0.774291|	0.079167|	0.039583|	0.95|	0.95
 
+Then we tried to use other indexing that we have discussed earlier. And here is
