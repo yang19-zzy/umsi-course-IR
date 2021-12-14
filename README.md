@@ -113,9 +113,9 @@ We made three pipelines. We had BM25 as our baseline. Since we wanted to try how
 - SDM -> BM25
 - BM25 -> Bo1QueryExpansion -> BM25
 
-Then, how do we evaluate our pipelines? 🤔  Remember, we want to know how models perform and how many relevant courses are recommend to students.
+Then, how do we evaluate our pipelines? 🤔  
 
-So, we needed nDCG@10, nDCG@5, P@10, P@5, R@10, R@5 (P=Precision, R=Recall). The reason we have evaluation values @5 and @10 is that we want to know how evaluation values change.
+So, we needed nDCG@10, nDCG@5, P@10, P@5, R@10, R@5 (P=Precision, R=Recall). The reason we have evaluation values @5 and @10 is that we want to know how evaluation values change. Also, remember, we want to know how models perform and how many relevant courses are recommend to students so that Recall is the one we care more about.
 
 Here are some codes that we used to evaluate our pipelines.
 ```
@@ -145,4 +145,11 @@ BM25	|0.210000|	0.707263|	0.753723|	0.067500|	0.037917|	0.81|	0.91
 SDM|	0.213333|	0.712436|	0.757567|	0.067500|	0.037917|	0.81|	0.91
 QE|	0.634167|	0.761060|	0.774291|	0.079167|	0.039583|	0.95|	0.95
 
-Then we tried to use other indexing that we have discussed earlier. And here is
+Then we tried to use other indexing that we have discussed earlier. And here is the evaluation results. You can notice that when using query expansion with Wikipedia indexing, the model has the best performance.
+
+name |	AP	| nDCG@10	| nDCG@5 |	R@10	| R@5	| P@10	| P@5
+--- | --- | --- | --- | --- | --- | --- | --- 
+BM25_baseline|	0.471802|	0.707263|	0.753723|	0.162|	0.091|	0.810|	0.91
+SDM	|0.475216|	0.711562|	0.769291|	0.161|	0.090|	0.805|	0.90|
+QE_doc2query|	0.561712|	0.729719|	0.772821|	0.167|	0.092|	0.835|	0.92
+QE_wiki|	0.613924|	0.745158|	0.767340|	0.179|	0.095|	0.895|	0.95
