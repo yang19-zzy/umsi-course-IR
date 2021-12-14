@@ -153,3 +153,13 @@ BM25_baseline|	0.471802|	0.707263|	0.753723|	0.162|	0.091|	0.810|	0.91
 SDM	|0.475216|	0.711562|	0.769291|	0.161|	0.090|	0.805|	0.90|
 QE_doc2query|	0.561712|	0.729719|	0.772821|	0.167|	0.092|	0.835|	0.92
 QE_wiki|	0.613924|	0.745158|	0.767340|	0.179|	0.095|	0.895|	0.95
+
+
+## V - Deployment
+In order to make the project outcome as real as possible, we used [streamlit](https://streamlit.io/) to deploy the retrieve model. Since we faced some technical issue, we can only share a screenshot of our "website". 
+
+
+## VI - Discussion
+
+
+## VII - Next Steps
