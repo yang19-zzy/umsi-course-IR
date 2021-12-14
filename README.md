@@ -72,4 +72,20 @@ index = pt.IndexFactory.of(index_ref)
 Here, we used [IterDictIndexer](https://pyterrier.readthedocs.io/en/latest/terrier-indexing.html#iterdictindexer), which because our preprocessed data is dataframe that can be iterated through, and also because it is much faster at transfering data since it used multiple threads and POSIX fifos.
 
 ### Other Indexings
-We tried to used other Indexers as well. 
+We tried to used other aproaches to get indexing as well.
+1. Wikipedia collection
+Since our origin data is limited and there're only 120 documents overall, we tried to make sure the index we have can handle more complicated tasks like query expansion. Therefore, we downloaded Wikipedia collection from [Pyterrier Dataset](https://pyterrier.readthedocs.io/en/latest/datasets.html#available-datasets) and did indexing in the same way we did for our original data.
+
+2. Doc2query
+Besides, we want to try **doc2query** that mentioned in the class and wonder how this technique could have an impact on retrived documents. So, we downloaded the pretrained model with t5-base that provided by our [professor David](https://jurgens.people.si.umich.edu/). 😎 Then we used this pretrained model to generate question-like query and appended query back to document.
+
+And the code for the **Indexer** will be something like this:
+```
+indexer = (
+    pyterrier_doc2query.Doc2Query('model.ckpt-1004000', doc_attr='abstract', batch_size=8, append=True)
+    >> pt.apply.generic(lambda df: df.rename(columns={'abstract': 'text'}))
+    >> pt.IterDictIndexer(pt_index_path, blocks=True, fields=['text'])
+)
+```
+
+## IV - Pipeline & Evaluation
