@@ -73,11 +73,11 @@ Here, we used [IterDictIndexer](https://pyterrier.readthedocs.io/en/latest/terri
 
 ### Other Indexings
 We tried to used other aproaches to get indexing as well.
-1. **Wikipedia collection**
+1. Wikipedia collection
 
 Since our origin data is limited and there're only 120 documents overall, we tried to make sure the index we have can handle more complicated tasks like query expansion. Therefore, we downloaded Wikipedia collection from [Pyterrier Dataset](https://pyterrier.readthedocs.io/en/latest/datasets.html#available-datasets) and did indexing in the same way we did for our original data.
 
-2. **Doc2query**
+2. Doc2query
 
 Besides, we want to try **doc2query** that mentioned in the class and wonder how this technique could have an impact on retrived documents. So, we downloaded the pretrained model with t5-base that provided by our [professor David](https://jurgens.people.si.umich.edu/). 😎 Then we used this pretrained model to generate question-like query and appended query back to document.
 
@@ -89,5 +89,18 @@ indexer = (
     >> pt.IterDictIndexer(pt_index_path, blocks=True, fields=['text'])
 )
 ```
+Tip📝: remember to install [pyterrier_doc2query](https://github.com/terrierteam/pyterrier_doc2query) first before you import it
 
 ## IV - Pipeline & Evaluation
+So, we tried some retrieved methods.
+1. BM25
+`pt.BatchRetrieve(index, wmodel="BM25")`
+
+
+2. SDM (Sequential Dependence Model)
+`pt.rewrite.SDM()`
+SDM creates N-gram representations and their weighting if the input query contains more than one words.
+
+3. Bo1QueryExpansion
+`pt.rewrite.Bo1QueryExpansion(index)`
+
