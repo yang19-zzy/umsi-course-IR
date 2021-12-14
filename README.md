@@ -8,25 +8,17 @@ For students from the University of Michigan, they are able to use [Atlas](https
 Therefore, we want to use the knowledge learned from the course to build a course search enginee by ourselves. 🤓
 
 ## II - Data
-### Data Recourse
-The data we used for this project is from [UMSI course website](https://www.si.umich.edu/programs/courses). We collected all courses it has, including course number, course name, and course description. 
+### Data Resource & Collection
+The data we used for this project is from [UMSI course website](https://www.si.umich.edu/programs/courses). We collected all courses it has, including course number, course name, and course description. As long as there is a course number or course code, no matter whether the course names are the same, each of them is considered as a separate file. We wrote each pair of course name and course description to a document and stored it as `.txt` file.
 
-Here are some codes that you can use.
-```
-from bs4 import BeautifulSoup
-import requests
+### Data Description
+There are total 120 courses under UMSI. We have 120 `.txt` files stored in Google Drive.
 
-def get_all_courses(myurl, mylist=[], course_source='umsi'):
-    if course_source == 'umsi':
-        response = requests.get(myurl)
-        txt = response.text
-        soup = BeautifulSoup(txt, 'html.parser')
-        next_page = soup.find('li', class_='pager__item pager__item--next')   # get next page object
-        if next_page:
-            items = soup.find_all("div", class_="item-teaser-group")
-            courses_item = [item['href'].split('/')[3] for item in items[0].find_all('a', href=True) if item['href'].split('/')[3]]
-            mylist.extend(courses_item)
-            next_page_url = myurl + next_page.find('a')['href']
-            courses = get_all_courses(next_page_url)
-    return mylist
-```
+### Data Preprocessing
+We created three DataFrames that we will need for the next step indexing.
+
+1. Document dataframe
+docno | abstract
+----------------
+si_106 | <course title> <course description>
+2. 
