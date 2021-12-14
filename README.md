@@ -69,4 +69,7 @@ else:
     index_ref = pt_index_path + "/data.properties"
 index = pt.IndexFactory.of(index_ref)
 ```
-Here, we
+Here, we used [IterDictIndexer](https://pyterrier.readthedocs.io/en/latest/terrier-indexing.html#iterdictindexer), which because our preprocessed data is dataframe that can be iterated through, and also because it is much faster at transfering data since it used multiple threads and POSIX fifos.
+
+### Other Indexings
+We tried to used other Indexers as well. 
