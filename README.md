@@ -19,6 +19,12 @@ We created three DataFrames that we will need for the next step indexing.
 
 1. Document dataframe
 docno | abstract
--------|---------
+---|---
 si_106 | <course title> <course description>
-2. 
+... | ...
+  
+2. Query dataframe
+qid | query
+--- | ---
+1 | R programming
+... | ...
