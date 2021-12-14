@@ -10,7 +10,6 @@ documents = get_documents_dict()
 
 if query:
     results = get_top_5_related(query)
-
     for i in results:
         st.markdown(f'<h3>{documents[i]}</h3>', unsafe_allow_html=True)
         st.markdown(get_course_link(course_num=i), unsafe_allow_html=True)
