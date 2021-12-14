@@ -21,7 +21,7 @@ We created three DataFrames that we will need for the next step indexing.
 
 docno | abstract
 ---|---
-si_106 | <course title> <course description>
+si_106 | 106 - Programs, Information and People ...
 ... | ...
   
 2. Query dataframe
@@ -30,3 +30,43 @@ qid | query
 --- | ---
 1 | R programming
 ... | ...
+
+3. Annotated dataframe
+
+qid | query | docno | abstract | label
+---| ---| --- | --- | --- 
+1 | R programming | si_106 | 106 - Programs, Information and People ... | 3
+...|...|...|...|...
+
+
+#### Annotation
+We used BM25 to retrieve top 50 most relevant courses for 20 queries and labeled these results with 5 points scale. Based on how query and course description related, we gave 5 to most related results and 1 to least related or not related.
+
+Here is how these query-doc pair distribute after annotation.
+
+![Number of Query-Doc Pairs in Each Relevant Level](https://github.com/yang19-zzy/umsi-course-IR/blob/main/image/barplot1.png)
+
+
+Also, since we didn't annotate all documents, the rest of query-doc pair we considered them having relation level 1.
+
+Here is how filled-with-1 query-doc pair distribute.
+
+![Number of Query-Doc Pairs in Each Relevant Level (fillna)](https://github.com/yang19-zzy/umsi-course-IR/blob/main/image/barplot2.png)
+
+
+## III - Indexing
+We used [Pyterrier](https://pyterrier.readthedocs.io/en/latest/installation.html) to fulfill our indexing need with the following code.
+```
+import pyterrier as pt
+if not pt.started():
+    pt.init()
+
+pt_index_path = './index/iterdictindex'
+if not os.path.exists(pt_index_path + "/data.properties"):
+    indexer = pt.IterDictIndexer(pt_index_path, blocks=True)
+    index_ref = indexer.index(df_doc.to_dict(orient="records"), fields=('docno', 'abstract'))
+else:
+    index_ref = pt_index_path + "/data.properties"
+index = pt.IndexFactory.of(index_ref)
+```
+Here, we
