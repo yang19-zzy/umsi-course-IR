@@ -108,5 +108,13 @@ SDM creates N-gram representations and their weighting if the input query contai
 `pt.rewrite.Bo1QueryExpansion(index)`
 This takes in a set of retrieved documents and generates most relevant tokens and append these tokens back to query. The output is the new query.
 
-We 
+We made three pipelines. We had BM25 as our baseline. Since we wanted to try how N-gram representations would impact the retrieved results and how query expansion performs, we generated the following pipelines.
+- BM25 **baseline**
+- SDM -> BM25
+- BM25 -> Bo1QueryExpansion -> BM25
 
+Then, how do we evaluate our pipelines? 🤔
+
+nDCG@10, nDCG@5, P@10, P@5, R@10, R@5 (P=Precision, R=Recall)
+
+Here are some codes that we used to evaluate our pipelines.
