@@ -1,4 +1,7 @@
 # Improve How Students Search for Courses
+(tl;dr)
+This project uses Pyterrier to index documents(course descriptions) and retrieve top 10 most relevant courses with Wikipedia collection indexing and its query expansion.
+
 
 ## I - Project Intention
 This project is originally a course project from UMSI 650 - Information Retrieval. Based on our own experience as students, we know that students are struggling with choosing the right courses for themselves, especially when they are still unsure about their future career path and want to try anything they're interested in.
@@ -89,13 +92,13 @@ indexer = (
     >> pt.IterDictIndexer(pt_index_path, blocks=True, fields=['text'])
 )
 ```
-Tip📝: remember to install [pyterrier_doc2query](https://github.com/terrierteam/pyterrier_doc2query) first before you import it
+Tip📝 - remember to install [pyterrier_doc2query](https://github.com/terrierteam/pyterrier_doc2query) first before you import it
 
 ## IV - Pipeline & Evaluation
 So, we tried some retrieved methods.
 1. BM25
 `pt.BatchRetrieve(index, wmodel="BM25")`
-
+Retrieve relevant documents with BM25
 
 2. SDM (Sequential Dependence Model)
 `pt.rewrite.SDM()`
@@ -103,4 +106,7 @@ SDM creates N-gram representations and their weighting if the input query contai
 
 3. Bo1QueryExpansion
 `pt.rewrite.Bo1QueryExpansion(index)`
+This takes in a set of retrieved documents and generates most relevant tokens and append these tokens back to query. The output is the new query.
+
+We 
 
