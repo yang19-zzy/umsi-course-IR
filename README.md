@@ -82,7 +82,7 @@ Since our origin data is limited and there're only 120 documents overall, we tri
 
 2. Doc2query
 
-Besides, we want to try **doc2query** that mentioned in the class and wonder how this technique could have an impact on retrived documents. So, we downloaded the pretrained model with t5-base that provided by our [professor David](https://jurgens.people.si.umich.edu/). 😎 Then we used this pretrained model to generate question-like query and appended query back to document.
+Besides, we want to try **doc2query** that mentioned in the class and wonder how this technique could have an impact on retrived documents. So, we downloaded the pretrained model with t5-base that provided by our [professor David](https://jurgens.people.si.umich.edu/). 😎  Then we used this pretrained model to generate question-like query and appended query back to document.
 
 And the code for the **Indexer** will be something like this:
 ```
@@ -113,8 +113,25 @@ We made three pipelines. We had BM25 as our baseline. Since we wanted to try how
 - SDM -> BM25
 - BM25 -> Bo1QueryExpansion -> BM25
 
-Then, how do we evaluate our pipelines? 🤔
+Then, how do we evaluate our pipelines? 🤔  Remember, we want to know how models perform and how many relevant courses are recommend to students.
 
-nDCG@10, nDCG@5, P@10, P@5, R@10, R@5 (P=Precision, R=Recall)
+So, we needed nDCG@10, nDCG@5, P@10, P@5, R@10, R@5 (P=Precision, R=Recall). The reason we have evaluation values @5 and @10 is that we want to know how fast the evaluation values change and how likely highly relevant courses are retrieved.
 
 Here are some codes that we used to evaluate our pipelines.
+```
+bm25 = pt.BatchRetrieve(index, wmodel="BM25")
+sdm = pt.rewrite.SDM()
+qe = pt.rewrite.Bo1QueryExpansion(index)
+
+pipeline_1 = sdm >> bm25
+pipeline_2 = bm25 >> qe >> bm25
+
+from pyterrier.measures import *
+pt.Experiment(
+    [bm25, pipeline_1, pipeline_2],
+    df_query,
+    df_anno[['qid', 'docno','label']],
+    eval_metrics=[MAP, nDCG@10, nDCG@5, R@10, R@5, P@10, P@5],
+    names=["BM25", "SDM", "QE"]
+)
+```
