@@ -17,15 +17,15 @@ def get_top_5_related(query):
 
     # load index
     index = pt.IndexFactory.of('./index/iterdictindex/data.properties')
-    index_wiki = pt.IndexFactory.of('./index/wikir_en1k/data.properties')
+    # index_wiki = pt.IndexFactory.of('./index/wikir_en1k/data.properties')
 
     # pipeline
     bm25 = pt.BatchRetrieve(index, wmodel="BM25")
-    bm25_wiki = pt.BatchRetrieve(index_wiki, wmodel="BM25", properties={"termpipelines" : "Stopwords,PorterStemmer"})
+    # bm25_wiki = pt.BatchRetrieve(index_wiki, wmodel="BM25", properties={"termpipelines" : "Stopwords,PorterStemmer"})
     # bm25s_stemmed = pt.BatchRetrieve(index, wmodel="BM25")
     qe_wiki = pt.rewrite.Bo1QueryExpansion(index_wiki)
 
-    pipeline = bm25_wiki >> qe_wiki >> bm25
+    pipeline = bm25 >> qe_wiki >> bm25
 
     # return results
     transform = pipeline.transform(query)
