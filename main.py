@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import pyterrier as pt
 from model import *
 
 # st.title('This is the title.')
